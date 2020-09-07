@@ -22,29 +22,17 @@ public class LoginToApplicationTest extends BusinessFunctions {
 	@BeforeTest
 	public void initialize() throws IOException {
 		driver=initializeDriver();
-		// driver.get(prop.getProperty("url")); 
 	}
 	
 	 @Test(dataProvider="ValidLoginData")
 	  public void validLoginCredentials(String username,String password) throws IOException {
 		  driver.get(prop.getProperty("url")); 
-		//  lp=new LoginPage(driver); 
-		//  lp.getUsername().sendKeys(username);
-		//  lp.getPassword().sendKeys(password);
-		//  lp.getLogin().click();
-		  
 		  loginCredentials(driver,username,password);
 	  }
 	 
 	  @Test(dataProvider="InvalidLoginData")
 	  public void invalidLoginCredentials(String username,String password) throws IOException {
 		 driver.get(prop.getProperty("url"));
-	/*	 lp=new LoginPage(driver);
-		 lp.getUsername().sendKeys(username);
-		 lp.getPassword().sendKeys(password);
-		 lp.getLogin().click();
-		 */
-		 
 		 loginCredentials(driver,username,password);
 	 }
 	
@@ -55,8 +43,6 @@ public class LoginToApplicationTest extends BusinessFunctions {
 		 lp.getUsername().sendKeys(username);
 		 lp.getPassword().sendKeys(password);
 		 lp.getLogin().click();
-		 
-		// loginCredentials(driver,username,password);
 		 ForgotPasswordFormPage fp=lp.getForgotPassword();
 		 fp.getEmailRecovery().sendKeys(email);
 		 fp.clickEmailPassword().click();
