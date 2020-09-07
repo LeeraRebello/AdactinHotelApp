@@ -24,96 +24,72 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 	public String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	public String sheetName;
-    
-	
+
 	@BeforeTest()
 	public void initialize() throws IOException {
 		driver = initializeDriver();
-		
-	}
-	
-	@Test(dataProvider="ValidLogin")
-	public void validLoginCredentials(String username,String password) {
-		driver.get(prop.getProperty("url")); 
-		lp=new LoginPage(driver);
-		lp.getUsername().sendKeys(username);
-		lp.getPassword().sendKeys(password);
-		lp.getLogin().click();
-	}
-	
 
-	@Test(dataProvider="SearchValidHotelData", dependsOnMethods="validLoginCredentials")
-	public void searchHotelWithValidData(String location,String hotel,String roomType,String roomNumber,
-			String datePickIn,String datePickOut,String adultNum,String childNum) {
-		  sp=new SearchHotelPage(driver);
-		  sp.getLocation(location);	
-		  sp.getHotels(hotel);
-		  sp.getRoomType(roomType);
-		  sp.getRoomNumbers(roomNumber);
-		  sp.getDatePickIn().sendKeys(datePickIn);
-		  sp.getDatePickOut().sendKeys(datePickOut);
-		  sp.getAdultRoom(adultNum);
-		  sp.getChildRoom(childNum);
-		  sp.clickSearch().click();
-		
 	}
-	@Test(dataProvider="SearchInvalidHotelData", dependsOnMethods="validLoginCredentials")
-	public void searchHotelWithInValidData(String location,String hotel,String roomType,String roomNumber,
-			String datePickIn, String datePickOut, String adultNum, String childNum) {
+
+	@Test(dataProvider = "ValidLogin")
+	public void validLoginCredentials(String username, String password) throws IOException {
+		driver.get(prop.getProperty("url"));
+		loginCredentials(driver, username, password);
+	}
+
+	@Test(dataProvider = "SearchValidHotelData", dependsOnMethods = "validLoginCredentials")
+	public void searchHotelWithValidData(String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum)
+			throws IOException, InterruptedException {
 		sp = new SearchHotelPage(driver);
-		sp.getLocation(location);
-		sp.getHotels(hotel);
-		sp.getRoomType(roomType);
-		sp.getRoomNumbers(roomNumber);
-		sp.getDatePickIn().sendKeys(datePickIn);
-		sp.getDatePickOut().sendKeys(datePickOut);
-		sp.getAdultRoom(adultNum);
-		sp.getChildRoom(childNum);
-	    sp.clickSearch().click();
-		
-	}
-	
+		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		sp.clickSearch().click();
+		Thread.sleep(2000);
 
-	@Test(dataProvider="SearchValidHotelData", dependsOnMethods="validLoginCredentials")
-	public void resetDetails(String location,String hotel,String roomType,String roomNumber,
-			String datePickIn,String datePickOut,String adultNum,String childNum) {
-		  sp=new SearchHotelPage(driver);
-		  sp.getLocation(location);	
-		  sp.getHotels(hotel);
-		  sp.getRoomType(roomType);
-		  sp.getRoomNumbers(roomNumber);
-		  sp.getDatePickIn().sendKeys(datePickIn);
-		  sp.getDatePickOut().sendKeys(datePickOut);
-		  sp.getAdultRoom(adultNum);
-		  sp.getChildRoom(childNum);
-		  sp.clickReset().click();
-		
 	}
 
-	
-	  @DataProvider(name="ValidLogin")
-	  public Object[][] readValidLogin() throws IOException{
-		 sheetName="ValidLogin";
-		 return BusinessFunctions.readExcel(filePath, sheetName);
-	  }
-	 
-	  @DataProvider(name="SearchValidHotelData")
-	  public Object[][] readSearchValidHotelData() throws IOException{
-		 sheetName="SearchHotelValid";
-		 return BusinessFunctions.readExcel(filePath, sheetName);
-	  }
-	  
-	  @DataProvider(name="SearchInvalidHotelData")
-	  public Object[][] readSearchInvalidHotelData() throws IOException{
-			 sheetName="SearchHotelInValid";
-			 return BusinessFunctions.readExcel(filePath, sheetName);
-		  }
-		  
-	 @AfterTest
-	 public void tearDown() {
-     driver.close();
-	  }
-	
-	
+	@Test(dataProvider = "SearchInvalidHotelData", dependsOnMethods = "validLoginCredentials")
+	public void searchHotelWithInValidData(String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum)
+			throws IOException, InterruptedException {
+		sp = new SearchHotelPage(driver);
+		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		sp.clickSearch().click();
+		Thread.sleep(2000);
+
+	}
+
+	@Test(dataProvider = "SearchValidHotelData", dependsOnMethods = "validLoginCredentials")
+	public void resetDetails(String location, String hotel, String roomType, String roomNumber, String datePickIn,
+			String datePickOut, String adultNum, String childNum) throws IOException, InterruptedException {
+		sp = new SearchHotelPage(driver);
+		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		sp.clickReset().click();
+		Thread.sleep(2000);
+
+	}
+
+	@DataProvider(name = "ValidLogin")
+	public Object[][] readValidLogin() throws IOException {
+		sheetName = "ValidLogin";
+		return BusinessFunctions.readExcel(filePath, sheetName);
+	}
+
+	@DataProvider(name = "SearchValidHotelData")
+	public Object[][] readSearchValidHotelData() throws IOException {
+		sheetName = "SearchHotelValid";
+		return BusinessFunctions.readExcel(filePath, sheetName);
+	}
+
+	@DataProvider(name = "SearchInvalidHotelData")
+	public Object[][] readSearchInvalidHotelData() throws IOException {
+		sheetName = "SearchHotelInValid";
+		return BusinessFunctions.readExcel(filePath, sheetName);
+	}
+
+	@AfterTest
+	public void tearDown() {
+		driver.close();
+	}
 
 }
