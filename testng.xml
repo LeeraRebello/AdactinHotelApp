@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="Automation.AdactinHotelApp.AppTest"/>
+      <class name="adactinHotelApp.tests.NewUserToApplicationTest"/>
+      <class name="adactinHotelApp.tests.LoginToApplicationTest"/>
+      <class name="adactinHotelApp.tests.SearchHotelToApplicationTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

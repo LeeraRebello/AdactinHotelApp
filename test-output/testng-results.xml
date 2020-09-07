@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="14" passed="14">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="15774" started-at="2020-09-07T12:47:25Z" finished-at="2020-09-07T12:47:41Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="15774" started-at="2020-09-07T12:47:25Z" finished-at="2020-09-07T12:47:41Z">
+      <class name="adactinHotelApp.tests.LoginToApplicationTest">
+        <test-method status="PASS" signature="initialize()[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="initialize" is-config="true" duration-ms="3933" started-at="2020-09-07T22:47:25Z" finished-at="2020-09-07T22:47:29Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initialize -->
+        <test-method status="PASS" signature="forgotPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="forgotPasswordCredentials" duration-ms="2713" started-at="2020-09-07T22:47:29Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:32Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrianing]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- forgotPasswordCredentials -->
+        <test-method status="PASS" signature="forgotPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="forgotPasswordCredentials" duration-ms="994" started-at="2020-09-07T22:47:32Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:33Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password101]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- forgotPasswordCredentials -->
+        <test-method status="PASS" signature="forgotPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="forgotPasswordCredentials" duration-ms="949" started-at="2020-09-07T22:47:33Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- forgotPasswordCredentials -->
+        <test-method status="PASS" signature="invalidLoginCredentials(java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="invalidLoginCredentials" duration-ms="323" started-at="2020-09-07T22:47:34Z" data-provider="InvalidLoginData" finished-at="2020-09-07T22:47:34Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrianing]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- invalidLoginCredentials -->
+        <test-method status="PASS" signature="invalidLoginCredentials(java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="invalidLoginCredentials" duration-ms="404" started-at="2020-09-07T22:47:34Z" data-provider="InvalidLoginData" finished-at="2020-09-07T22:47:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password101]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- invalidLoginCredentials -->
+        <test-method status="PASS" signature="invalidLoginCredentials(java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="invalidLoginCredentials" duration-ms="351" started-at="2020-09-07T22:47:35Z" data-provider="InvalidLoginData" finished-at="2020-09-07T22:47:35Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- invalidLoginCredentials -->
+        <test-method status="PASS" signature="navigationToRegistration()[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="navigationToRegistration" duration-ms="230" started-at="2020-09-07T22:47:35Z" finished-at="2020-09-07T22:47:35Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigationToRegistration -->
+        <test-method status="PASS" signature="resetFunctionality(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetFunctionality" duration-ms="842" started-at="2020-09-07T22:47:36Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:36Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrianing]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetFunctionality -->
+        <test-method status="PASS" signature="resetFunctionality(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetFunctionality" duration-ms="838" started-at="2020-09-07T22:47:36Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:37Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password101]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetFunctionality -->
+        <test-method status="PASS" signature="resetFunctionality(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetFunctionality" duration-ms="853" started-at="2020-09-07T22:47:37Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:38Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetFunctionality -->
+        <test-method status="PASS" signature="resetPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetPasswordCredentials" duration-ms="668" started-at="2020-09-07T22:47:38Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrianing]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetPasswordCredentials -->
+        <test-method status="PASS" signature="resetPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetPasswordCredentials" duration-ms="707" started-at="2020-09-07T22:47:39Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:39Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password101]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetPasswordCredentials -->
+        <test-method status="PASS" signature="resetPasswordCredentials(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="resetPasswordCredentials" duration-ms="685" started-at="2020-09-07T22:47:39Z" data-provider="ForgotPassword" finished-at="2020-09-07T22:47:40Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtrain]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Adtraining@adactin.com]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- resetPasswordCredentials -->
+        <test-method status="PASS" signature="validLoginCredentials(java.lang.String, java.lang.String)[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="validLoginCredentials" duration-ms="434" started-at="2020-09-07T22:47:40Z" data-provider="ValidLoginData" finished-at="2020-09-07T22:47:41Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Adtraining]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[Password101]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validLoginCredentials -->
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:adactinHotelApp.tests.LoginToApplicationTest@2a5ca609]" name="tearDown" is-config="true" duration-ms="68" started-at="2020-09-07T22:47:41Z" finished-at="2020-09-07T22:47:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- adactinHotelApp.tests.LoginToApplicationTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
