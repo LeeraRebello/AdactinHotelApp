@@ -12,15 +12,17 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.collections.Lists;
 
+import adactinHotelApp.pageObejcts.ChangePasswordFormPage;
 import adactinHotelApp.pageObejcts.LoginPage;
 import adactinHotelApp.pageObejcts.SearchHotelPage;
 import adactinHotelApp.resources.BusinessFunctions;
+import adactinHotelApp.utils.ExcelDataUtils;
+import junit.framework.Assert;
 
 public class SearchHotelToApplicationTest extends BusinessFunctions {
 
 	public WebDriver driver;
 	public SearchHotelPage sp;
-	public LoginPage lp;
 	public String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	public String sheetName;
@@ -31,61 +33,90 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 
 	}
 
-	@Test(dataProvider = "ValidLogin")
-	public void validLoginCredentials(String username, String password) throws IOException {
+
+   @Test(dataProvider="SearchHotelValid")
+	public void searchHotelWithValidData(String username,String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
-		loginCredentials(driver, username, password);
+		sp = new SearchHotelPage(driver);
+		searchHotel(driver, username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		sp.clickSearch().click();
+		Thread.sleep(2000);
 	}
-
-	@Test(dataProvider = "SearchValidHotelData", dependsOnMethods = "validLoginCredentials")
-	public void searchHotelWithValidData(String location, String hotel, String roomType, String roomNumber,
+	
+	
+	@Test(dataProvider = "SearchHotelInvalid")
+	public void searchHotelWithInValidData(String username,String password,String location, String hotel, String roomType, String roomNumber,
 			String datePickIn, String datePickOut, String adultNum, String childNum)
 			throws IOException, InterruptedException {
+		driver.get(prop.getProperty("url"));
 		sp = new SearchHotelPage(driver);
-		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		searchHotel(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
 		sp.clickSearch().click();
 		Thread.sleep(2000);
 
 	}
 
-	@Test(dataProvider = "SearchInvalidHotelData", dependsOnMethods = "validLoginCredentials")
-	public void searchHotelWithInValidData(String location, String hotel, String roomType, String roomNumber,
+	
+
+	@Test(dataProvider = "SearchHotelValid")
+	public void ResetSearchHotel(String username,String password,String location, String hotel, String roomType, String roomNumber,
 			String datePickIn, String datePickOut, String adultNum, String childNum)
 			throws IOException, InterruptedException {
+		driver.get(prop.getProperty("url"));
 		sp = new SearchHotelPage(driver);
-		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
-		sp.clickSearch().click();
-		Thread.sleep(2000);
-
-	}
-
-	@Test(dataProvider = "SearchValidHotelData", dependsOnMethods = "validLoginCredentials")
-	public void resetDetails(String location, String hotel, String roomType, String roomNumber, String datePickIn,
-			String datePickOut, String adultNum, String childNum) throws IOException, InterruptedException {
-		sp = new SearchHotelPage(driver);
-		searchHotel(driver, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+		searchHotel(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
 		sp.clickReset().click();
 		Thread.sleep(2000);
 
 	}
+	
+	
+	
+	@Test(dataProvider = "SearchHotelValid")
+	public void showUsername(String username,String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum)
+			throws IOException, InterruptedException {
+		driver.get(prop.getProperty("url"));
+		sp = new SearchHotelPage(driver);
+		searchHotel(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum);
+	    String expectedUsername="Hello"+" "+username+"!";
+		Assert.assertEquals("Username not showing as expected",expectedUsername, sp.showUsername());
+		Thread.sleep(2000);
 
-	@DataProvider(name = "ValidLogin")
-	public Object[][] readValidLogin() throws IOException {
-		sheetName = "ValidLogin";
-		return BusinessFunctions.readExcel(filePath, sheetName);
+	}
+	
+/*	
+	
+	@Test(dataProvider="ValidLoginData")
+	public void changePassword(String username,String password,String currentPassword,
+			String newPassword,String rePassword) throws IOException {
+		driver.get(prop.getProperty("url"));
+		sp = new SearchHotelPage(driver);
+		changePassword(driver,username,password,currentPassword,newPassword,rePassword);
+		ChangePasswordFormPage cp=new ChangePasswordFormPage(driver);
+		cp.clickSubmit().click();
+	}
+	
+*/
+	@DataProvider(name = "SearchHotelValid")
+	public Object[][] readHotelWithValidData() throws IOException {
+		sheetName = "SearchHotelPositiveTest";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
-	@DataProvider(name = "SearchValidHotelData")
-	public Object[][] readSearchValidHotelData() throws IOException {
-		sheetName = "SearchHotelValid";
-		return BusinessFunctions.readExcel(filePath, sheetName);
+	@DataProvider(name = "SearchHotelInvalid")
+	public Object[][] readHotelWithInvalidData() throws IOException {
+		sheetName = "SearchHotelNegativeTest";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
+	}
+	
+	@DataProvider(name = "ValidLoginData")
+	public Object[][] readValidPasswordData() throws IOException {
+		sheetName = "ChangePassword";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
-	@DataProvider(name = "SearchInvalidHotelData")
-	public Object[][] readSearchInvalidHotelData() throws IOException {
-		sheetName = "SearchHotelInValid";
-		return BusinessFunctions.readExcel(filePath, sheetName);
-	}
 
 	@AfterTest
 	public void tearDown() {

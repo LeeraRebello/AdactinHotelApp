@@ -19,8 +19,59 @@ public class SearchResultsPage {
 	@FindBy(id="search_hotel")
 	WebElement searchHotel;
 	
+	@FindBy(xpath="//input[@value='Cancel Selected']")
+	WebElement cancelSelected;
+	
 	@FindBy(id="logout")
 	WebElement logout;
 	
+	@FindBy(id="hotel_name_374880")
+	WebElement hotelName;
+	
+	@FindBy(id="location_374880")
+	WebElement location;
+	
+	@FindBy(id="rooms_374880")
+	WebElement room;
+	
+	@FindBy(id="first_name_374880")
+	WebElement firstName;
+	
+	@FindBy(id="last_name_374880")
+	WebElement lastName;
+	
+	@FindBy(id="arr_date_374880")
+	WebElement arrDate;
+	
+	@FindBy(id="dep_date_374880")
+	WebElement depDate;
+	
+	@FindBy(id="no_days_374880")
+	WebElement noOfDays;
+	
+	@FindBy(id="room_type_374880")
+	WebElement roomType;
+	
+	@FindBy(id="price_night_374880")
+	WebElement pricePerNight;
+	
+	@FindBy(id="total_price_374880")
+	WebElement totalPrice;
+	
+	
+	public WebElement getCheckbox() {
+		return checkbox;
+	}
+
+	public WebElement getCancelSelected() {
+		return cancelSelected;
+	}
+	public WebElement getSearchHotel() {
+		return searchHotel;
+	}
+	
+	public WebElement logout() {
+		return logout;
+	}
 	
 }

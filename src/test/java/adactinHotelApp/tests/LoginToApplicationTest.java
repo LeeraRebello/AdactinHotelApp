@@ -12,6 +12,7 @@ import adactinHotelApp.pageObejcts.ForgotPasswordFormPage;
 import adactinHotelApp.pageObejcts.LoginPage;
 import adactinHotelApp.pageObejcts.RegistrationPage;
 import adactinHotelApp.resources.BusinessFunctions;
+import adactinHotelApp.utils.ExcelDataUtils;
 
 public class LoginToApplicationTest extends BusinessFunctions {
 	public WebDriver driver;
@@ -26,48 +27,46 @@ public class LoginToApplicationTest extends BusinessFunctions {
 	}
 
 	@Test(dataProvider = "ValidLoginData")
-	public void validLoginCredentials(String username, String password) throws IOException {
+	public void validLoginCredentials(String username, String password) throws IOException, InterruptedException {
+		driver.get(prop.getProperty("url"));
+		loginCredentials(driver, username, password);
+		Thread.sleep(2000);
+	}
+
+  
+	@Test(dataProvider = "InValidLoginData")
+	public void invalidLoginCredentials(String username,String password,String email) throws IOException {
 		driver.get(prop.getProperty("url"));
 		loginCredentials(driver, username, password);
 	}
 
-	@Test(dataProvider = "InvalidLoginData")
-	public void invalidLoginCredentials(String username, String password) throws IOException {
-		driver.get(prop.getProperty("url"));
-		loginCredentials(driver, username, password);
-	}
-
-	@Test(dataProvider = "ForgotPassword")
+	
+	@Test(dataProvider = "InValidLoginData")
 	public void resetPasswordCredentials(String username, String password, String email) throws IOException {
 		driver.get(prop.getProperty("url"));
-		lp = new LoginPage(driver);
-		loginCredentials(driver, username, password);
-		ForgotPasswordFormPage fp = lp.getForgotPassword();
-		fp.getEmailRecovery().sendKeys(email);
+		resetPassword(driver,username,password,email);
+		ForgotPasswordFormPage fp = new ForgotPasswordFormPage(driver);
 		fp.clickEmailPassword().click();
 
 	}
 
-	@Test(dataProvider = "ForgotPassword")
+	
+	@Test(dataProvider = "InValidLoginData")
 	public void forgotPasswordCredentials(String username, String password, String email) throws IOException {
 		driver.get(prop.getProperty("url"));
-		lp = new LoginPage(driver);
-		loginCredentials(driver, username, password);
-		ForgotPasswordFormPage fp = lp.getForgotPassword();
-		fp.getEmailRecovery().sendKeys(email);
+     	resetPassword(driver,username,password,email);
+		ForgotPasswordFormPage fp = new ForgotPasswordFormPage(driver);
 		fp.clickEmailPassword().click();
 
 	}
 
-	@Test(dataProvider = "ForgotPassword")
-	public void resetFunctionality(String username, String password, String email) throws IOException {
+	@Test(dataProvider = "InValidLoginData")
+	public void resetFunctionality(String username, String password, String email) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
-		lp = new LoginPage(driver);
-		loginCredentials(driver, username, password);
-		ForgotPasswordFormPage fp = lp.getForgotPassword();
-		fp.getEmailRecovery().sendKeys(email);
+		resetPassword(driver,username,password,email);
+		ForgotPasswordFormPage fp = new ForgotPasswordFormPage(driver);
 		fp.clickReset().click();
-
+		Thread.sleep(2000);
 	}
 
 	@Test
@@ -80,24 +79,21 @@ public class LoginToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "ValidLoginData")
 	public Object[][] readValidLoginData() throws IOException {
-		sheetName = "ValidLogin";
-		return BusinessFunctions.readExcel(filePath, sheetName);
+		sheetName = "LoginPositiveTest";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
-	@DataProvider(name = "InvalidLoginData")
+	@DataProvider(name = "InValidLoginData")
 	public Object[][] readInvalidLoginData() throws IOException {
-		sheetName = "InvalidLogin";
-		return BusinessFunctions.readExcel(filePath, sheetName);
+		sheetName = "LoginNegativeTest";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}
-
-	@DataProvider(name = "ForgotPassword")
-	public Object[][] readForgotPasswordData() throws IOException {
-		sheetName = "RecoveryEmail";
-		return BusinessFunctions.readExcel(filePath, sheetName);
-
-	}
-
+	
+	
+	
+	
+	
 	@AfterTest
 	public void tearDown() {
 		driver.close();

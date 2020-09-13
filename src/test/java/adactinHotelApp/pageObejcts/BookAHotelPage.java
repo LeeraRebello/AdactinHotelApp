@@ -1,17 +1,51 @@
 package adactinHotelApp.pageObejcts;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BookAHotelPage {
 
 	WebDriver driver;
+	
 	public BookAHotelPage(WebDriver driver) {
 	this.driver=driver;
 	PageFactory.initElements(driver, this);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
+	
+	@FindBy(id="hotel_name_dis")
+	WebElement hotelName;
+	
+	@FindBy(id="location_dis")
+	WebElement location;
+	
+	@FindBy(id="room_type_dis")
+	WebElement roomType;
+	
+	@FindBy(id="room_num_dis")
+	WebElement roomNum;
+	
+	@FindBy(id="total_days_dis")
+	WebElement totalDays;
+	
+	@FindBy(id="price_night_dis")
+	WebElement pricePerNight;
+	
+	@FindBy(id="total_price_dis")
+	WebElement totalPrice;
+	
+	@FindBy(id="gst_dis")
+	WebElement gst;
+	
+	@FindBy(id="final_price_dis")
+	WebElement finalPrice;
 	
 	@FindBy(id="first_name")
 	WebElement firstName;
@@ -43,35 +77,153 @@ public class BookAHotelPage {
 	@FindBy(css="input[name='cancel']")
 	WebElement cancel;
 	
+	public String getLocation() {
+		return location.getAttribute("value");
+		
+	}
+	
+	public String getHotelName() {
+		return hotelName.getAttribute("value");
+		
+	}
+	
+	public String getRoomType() {
+		return roomType.getAttribute("value");
+		
+	}
+	
+	public String getRoomNumber() {
+		String text=roomNum.getAttribute("value");
+		String[] parts=text.split(" ");
+		String value=parts[0];
+		//int number=Integer.parseInt(value);
+		return value;
+		
+	}
+	
+	public int getTotalDays() {
+		String text=totalDays.getAttribute("value");
+		String[] parts=text.split(" ");
+		String value=parts[0];
+		int number=Integer.parseInt(value);
+		return number;
+		
+	}
+	
+	public int getInteger(String text) {
+		String[] parts=text.split(" ");
+		String value=parts[0];
+		int number=Integer.parseInt(value);
+		return number;
+	}
+	
+	public int getPrice(String text) {
+		String[] parts=text.split(" ");
+		String value=parts[2];
+		int price=Integer.parseInt(value);
+		return price;
+	}
+	
+	
+	public int getPricePerNight() {
+	
+		String text= pricePerNight.getAttribute("value");
+		return getPrice(text);
+		
+	}
+	
+	/*public int getTotalPrice() {
+		String text=totalPrice.getAttribute("value");
+		return getPrice(text);
+		
+	}*/
+	
+	public String getTotalPrice() {
+		String text=totalPrice.getAttribute("value");
+		String[] parts=text.split(" ");
+		String value=parts[2];
+		return value;
+		
+	}
+	
+	public double getGST() {
+		String text=gst.getAttribute("value");
+		String[] parts=text.split(" ");
+		String value=parts[2];
+		double price= Double.parseDouble(value);
+		return price;
+		
+	}
+	
+	public double getFinalPrice() {
+		String text=finalPrice.getAttribute("value");
+		String[] parts=text.split(" ");
+		String value=parts[2];
+		double price=Double.parseDouble(value);
+		return price;
+		
+	}
+	
+	public int getMatchPrice() {
+		//int roomNumber=Integer.parseInt(getRoomNumber());
+		int roomNumber=Integer.parseInt(getRoomNumber());
+		int totalDays=getTotalDays();
+		int price=getPricePerNight();
+		int result=roomNumber*totalDays*price;
+		return result;
+		
+	}
+	
+	/*public double matchFinalPrice() {
+		int total=getTotalPrice();
+		double gst=getGST();
+		double finalPrice=total+gst;
+		return finalPrice;
+	}*/
 	public WebElement getFirstName() {
+		firstName.clear();
 		return firstName;
 	}
 	
 	public WebElement getLastName() {
+		lastName.clear();
 		return lastName;
 	}
 	
 	public WebElement getBillingAddress() {
+		address.clear();
 		return address;
 	}
 	
 	public WebElement getCreditCardNumber() {
+		creditCardNumber.clear();
 		return creditCardNumber;
 	}
 	
-	public WebElement getCreditCardType() {
-		return creditCardType;
+	
+	public void getCreditCardType(String type) {
+	
+	    creditCardType.click();
+		Select s=new Select(creditCardType);
+		s.selectByValue(type);
 	}
 	
-	public WebElement getCCExpiryMonth() {
-		return expiryMonth;
+
+	public void getCCExpiryMonth(String month) {
+		expiryMonth.click();
+		Select s=new Select(expiryMonth);
+		s.selectByValue(month);
 	}
 	
-	public WebElement getCCExpiryYear() {
-		return expiryYear;
+	
+	public void getCCExpiryYear(String year) {
+		expiryYear.click();;
+		Select s=new Select(expiryYear);
+		s.selectByValue(year);
 	}
 	
 	public WebElement getCVV() {
+		cvv.clear();
 		return cvv;
 	}
 	

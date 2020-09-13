@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 import adactinHotelApp.pageObejcts.LoginPage;
 import adactinHotelApp.pageObejcts.RegistrationPage;
 import adactinHotelApp.resources.BusinessFunctions;
+import adactinHotelApp.utils.ExcelDataUtils;
 
 public class NewUserToApplicationTest extends BusinessFunctions {
 
@@ -32,6 +33,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		rp = new RegistrationPage(driver);
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
 		rp.clickRegister().click();
+		Thread.sleep(2000);
 
 	}
 
@@ -49,7 +51,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 	@DataProvider(name = "NewUser")
 	public Object[][] readNewUserWithValidDetails() throws IOException {
 		sheetName = "NewUserRegistration";
-		return BusinessFunctions.readExcel(filePath, sheetName);
+		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}
 

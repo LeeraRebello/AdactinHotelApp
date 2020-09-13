@@ -13,7 +13,7 @@ public class LoginAgainPage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath="//a[contains(text(),'Click here to login again']")
+	@FindBy(xpath="//a[contains(text(),'Click here to login again')]")
 	WebElement loginAgain;
 	
 	public WebElement clickLoginAgain() {
