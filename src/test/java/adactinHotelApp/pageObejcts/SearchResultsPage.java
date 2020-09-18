@@ -13,6 +13,9 @@ public class SearchResultsPage {
 		PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(xpath="//a[contains(text(),'Show all')]")
+	WebElement showAll;
+	
 	@FindBy(xpath="//input[@name='ids[]']")
 	WebElement checkbox;
 	
@@ -58,6 +61,9 @@ public class SearchResultsPage {
 	@FindBy(id="total_price_374880")
 	WebElement totalPrice;
 	
+	public WebElement getShowAll() {
+		return showAll;
+	}
 	
 	public WebElement getCheckbox() {
 		return checkbox;

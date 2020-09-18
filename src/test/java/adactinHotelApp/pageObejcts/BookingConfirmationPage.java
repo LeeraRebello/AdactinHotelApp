@@ -15,6 +15,24 @@ public class BookingConfirmationPage {
 	PageFactory.initElements(driver, this);
 	}
 	
+	@FindBy(id="username_show")
+	WebElement showUserName;
+	
+	@FindBy(xpath="//a[contains(text(),'Search Hotel')]")
+	WebElement searchHotelInMenu;
+	
+	@FindBy(xpath="//a[contains(text(),'Booked Itinerary')]")
+	WebElement bookedItinerary;
+	
+	@FindBy(xpath="//a[contains(text(),'Change Password')]")
+	WebElement changePassword;
+	
+	@FindBy(xpath="//a[contains(text(),'Logout')]")
+	WebElement logoutInMenu;
+	
+
+	
+	
 	@FindBy(id="hotel_name")
 	WebElement hotelName;
 	
@@ -68,6 +86,55 @@ public class BookingConfirmationPage {
 	
 	@FindBy(css="input[id='final_price_dis']")
 	WebElement finalPrice;
+	
+	//@FindBy(id="first_name")
+	@FindBy(xpath="//input[@id='first_name']")
+	WebElement firstName;
+	
+	//@FindBy(id="last_name")
+	@FindBy(xpath="//input[@id='last_name']")
+	WebElement lastName;
+	
+	
+	//@FindBy(id="address")
+	@FindBy(xpath="//textarea[@id='address']")
+	WebElement address;
+	
+	
+	
+	public String showUsername() {
+		return showUserName.getAttribute("value");
+	}
+    
+	public WebElement getSearchHotel() {
+		return searchHotelInMenu;
+	}
+	
+	public WebElement getBookedItinerary() {
+		 return bookedItinerary;
+    }
+	 
+	public WebElement getChangePassword() {
+		return changePassword;
+	}
+	
+    public WebElement getLogout() {
+    	return logout;
+    }
+	
+	
+	public String getFirstName() {
+		return firstName.getAttribute("value");
+	}
+	
+	public String getLastName() {
+		return lastName.getAttribute("value");
+		
+	}
+	
+	public String getAddress() {
+		return address.getText();
+	}
 	
 	public int getInteger(String text) {
 		String[] parts=text.split(" ");
@@ -126,7 +193,7 @@ public class BookingConfirmationPage {
 			
 	}
 	
-	public int matchPrice() {
+	public int matchTotalPrice() {
 		int roomNumber = getRoomNumber();
 		int totalDays= getTotalDays();
 		int price = getPricePerNight();
@@ -165,6 +232,6 @@ public class BookingConfirmationPage {
 	}
 	
 	public WebElement clickLogout() {
-		return logout;
+		return logoutInMenu;
 	}
 }

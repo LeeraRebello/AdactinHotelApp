@@ -47,7 +47,7 @@ public class LoginPage {
 	 }
 	 
 		
-	 public ForgotPasswordFormPage getForgotPassword() {
+	/* public ForgotPasswordFormPage getForgotPassword() {
 		 forgotPassword.click();
 		 ForgotPasswordFormPage fp=new ForgotPasswordFormPage(driver);
 		 return fp;
@@ -57,6 +57,15 @@ public class LoginPage {
 		 resetPassword.click();
 		 ForgotPasswordFormPage fp=new ForgotPasswordFormPage(driver);
 		 return fp;
+	 }*/
+	 
+	 
+	 public WebElement getForgotPassword() {
+		 return forgotPassword;
+		 
+	 }
+	 public WebElement getResetPassword() {
+		 return resetPassword;
 	 }
 	  
 	

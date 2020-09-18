@@ -20,6 +20,24 @@ public class BookAHotelPage {
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
+	@FindBy(xpath="//a[contains(text(),'Back')]")
+	WebElement backLink;
+	
+	@FindBy(id="username_show")
+	WebElement showUsername;
+	
+	@FindBy(xpath="//a[contains(text(),'Search Hotel')]")
+	WebElement searchHotel;
+	
+	@FindBy(xpath="//a[contains(text(),'Booked Itinerary')]")
+	WebElement bookedItinerary;
+	
+	@FindBy(xpath="//a[contains(text(),'Change Password')]")
+	WebElement changePassword;
+	
+	@FindBy(xpath="//a[contains(text(),'Logout')]")
+	WebElement logout;;
+	
 	@FindBy(id="hotel_name_dis")
 	WebElement hotelName;
 	
@@ -77,6 +95,30 @@ public class BookAHotelPage {
 	@FindBy(css="input[name='cancel']")
 	WebElement cancel;
 	
+	public WebElement getBackLink() {
+		return backLink;
+	}
+	
+	public String showUsername() {
+		return showUsername.getAttribute("value");
+	}
+	
+	public WebElement getsearchHotel() {
+		return searchHotel;
+	}
+	
+	public WebElement getBookedItinerary() {
+		return bookedItinerary;
+	}
+	
+	public WebElement getChangePassword() {
+		return changePassword;
+	}
+	
+	public WebElement getLogout() {
+		return logout;
+	}
+	
 	public String getLocation() {
 		return location.getAttribute("value");
 		
@@ -132,18 +174,10 @@ public class BookAHotelPage {
 		
 	}
 	
-	/*public int getTotalPrice() {
+	
+	public int getTotalPrice() {
 		String text=totalPrice.getAttribute("value");
 		return getPrice(text);
-		
-	}*/
-	
-	public String getTotalPrice() {
-		String text=totalPrice.getAttribute("value");
-		String[] parts=text.split(" ");
-		String value=parts[2];
-		return value;
-		
 	}
 	
 	public double getGST() {
@@ -164,8 +198,8 @@ public class BookAHotelPage {
 		
 	}
 	
-	public int getMatchPrice() {
-		//int roomNumber=Integer.parseInt(getRoomNumber());
+	public int matchTotalPrice() {
+		
 		int roomNumber=Integer.parseInt(getRoomNumber());
 		int totalDays=getTotalDays();
 		int price=getPricePerNight();
@@ -174,12 +208,12 @@ public class BookAHotelPage {
 		
 	}
 	
-	/*public double matchFinalPrice() {
+    public double matchFinalPrice() {
 		int total=getTotalPrice();
 		double gst=getGST();
 		double finalPrice=total+gst;
 		return finalPrice;
-	}*/
+	}
 	public WebElement getFirstName() {
 		firstName.clear();
 		return firstName;

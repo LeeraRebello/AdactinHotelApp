@@ -53,6 +53,29 @@ public class SearchHotelPage {
 	@FindBy(css = "input[value='Reset']")
 	WebElement reset;
 	
+	@FindBy(xpath="//a[contains(text(),'Search Hotel')]")
+	WebElement searchHotel;
+	
+	@FindBy(xpath="//a[contains(text(),'Booked Itinerary')]")
+	WebElement bookedItinerary;
+	
+	@FindBy(xpath="//a[contains(text(),'Logout')]")
+	WebElement logout;
+	
+	@FindBy(id="checkin_span")
+	WebElement checkinError;
+	
+	@FindBy(id="checkout_span")
+	WebElement checkoutError;
+	
+	public String showCheckInError() {
+		return checkinError.getText();
+	}
+	
+	public String showCheckOutError() {
+		return checkoutError.getText();
+	}
+	
 	public String showUsername() {
 		return usernameShow.getAttribute("value");
 	}
@@ -61,6 +84,22 @@ public class SearchHotelPage {
 		changePassword.click();
 		ChangePasswordFormPage cp=new ChangePasswordFormPage(driver);
 		return cp;
+	}
+	
+	public WebElement searchHotel() {
+		return searchHotel;
+	}
+	
+	public WebElement bookedItinerary() {
+		return bookedItinerary;
+	}
+	
+	public WebElement logout() {
+		return logout;
+	}
+	
+	public WebElement getChangePassword() {
+		return changePassword;
 	}
 
 	public void getLocation(String placeName) {

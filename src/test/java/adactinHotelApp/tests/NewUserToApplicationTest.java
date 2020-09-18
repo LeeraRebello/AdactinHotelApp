@@ -12,6 +12,7 @@ import adactinHotelApp.pageObejcts.LoginPage;
 import adactinHotelApp.pageObejcts.RegistrationPage;
 import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
+import junit.framework.Assert;
 
 public class NewUserToApplicationTest extends BusinessFunctions {
 
@@ -26,6 +27,15 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		driver = initializeDriver();
 	}
 
+	@Test(dataProvider = "VerifyTitle")
+	public void verifyTitle(String username, String password) throws InterruptedException, IOException {
+		driver.get(prop.getProperty("url"));
+		lp = new LoginPage(driver);
+		lp.getNewUser();
+		Assert.assertEquals(driver.getTitle(), "Adactin.com - New User Registration");
+
+	}
+
 	@Test(dataProvider = "NewUser")
 	public void newUserDetails(String username, String password, String confirmPassword, String fullname, String email)
 			throws InterruptedException, IOException {
@@ -33,8 +43,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		rp = new RegistrationPage(driver);
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
 		rp.clickRegister().click();
-		Thread.sleep(2000);
-
+		
 	}
 
 	@Test(dataProvider = "NewUser")
@@ -44,13 +53,20 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		rp = new RegistrationPage(driver);
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
 		rp.clickReset().click();
-		Thread.sleep(2000);
+		
 
 	}
 
 	@DataProvider(name = "NewUser")
 	public Object[][] readNewUserWithValidDetails() throws IOException {
 		sheetName = "NewUserRegistration";
+		return ExcelDataUtils.readExcel(filePath, sheetName);
+
+	}
+
+	@DataProvider(name = "VerifyTitle")
+	public Object[][] readTitle() throws IOException {
+		sheetName = "LoginPositiveTest";
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}

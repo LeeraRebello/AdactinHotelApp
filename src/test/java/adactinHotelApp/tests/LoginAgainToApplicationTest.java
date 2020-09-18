@@ -36,6 +36,7 @@ public class LoginAgainToApplicationTest extends BusinessFunctions {
 		loginAgain(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum,firstName,
 					lastName,address,ccNum,ccType,expMonth,expYear,cvv);
 		lap=new LoginAgainPage(driver);
+		Thread.sleep(2000);
 		lap.clickLoginAgain().click();
 		Thread.sleep(2000);
 		

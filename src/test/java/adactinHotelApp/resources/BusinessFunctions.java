@@ -45,6 +45,7 @@ public class BusinessFunctions {
 	public BookedItineraryPage bip;
 	public SearchResultsPage srp;
 	public LoginAgainPage lap;
+	public ForgotPasswordFormPage fp;
 	public static Logger log=LogManager.getLogger(BusinessFunctions.class.getName());
 
 	public WebDriver initializeDriver() throws IOException {
@@ -83,20 +84,33 @@ public class BusinessFunctions {
 		lp.getLogin().click();
 	}
 	
-
-	public void resetPassword(WebDriver driver,String username,String password,String email) throws IOException {		
-		loginCredentials(driver,username,password);
-		ForgotPasswordFormPage fp = lp.getForgotPassword();
-		fp.getEmailRecovery().sendKeys(email);
+	public void forgotPassword(WebDriver driver,String email) throws IOException {	
+		prop = new Properties();
+		FileInputStream fis = new FileInputStream(
+				System.getProperty("user.dir") + "\\src\\test\\java\\adactinHotelApp\\resources\\data.properties");
+		prop.load(fis);
+		lp = new LoginPage(driver);
+		lp.getForgotPassword().click();
+		fp=new ForgotPasswordFormPage(driver);
 		
+		
+	}
+	
+	public void resetPassword(WebDriver driver,String username,String password,String email) throws IOException {	
+		loginCredentials(driver,username,password);
+		lp.getResetPassword().click();
+				
+	}
+	
+	
+	public void welcomeMenuInSearchHotel(WebDriver driver,String username,String password) throws IOException {
+		loginCredentials(driver,username,password);
 	}
 	
 
 	public void changePassword(WebDriver driver,String username,String password,String currentPassword,String newPassword,
 			String rePassword) throws IOException {		
 		loginCredentials(driver,username,password);
-		//ForgotPasswordFormPage fp = lp.getForgotPassword();
-		//fp.getEmailRecovery().sendKeys(email);
 		sp=new SearchHotelPage(driver);	
 		ChangePasswordFormPage cp=sp.changePassword();
 		cp.getCurrentPassword().sendKeys(currentPassword);
@@ -127,6 +141,16 @@ public class BusinessFunctions {
 		
 	}
 	
+
+	public void welcomeMenuInSelectHotel(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum) throws IOException {
+		searchHotelWithPositiveData(driver,username,password,location,hotel,roomType,roomNumber,datePickIn,datePickOut,
+				adultNum,childNum);
+		
+		
+		
+	}
+	
 	public void searchHotelWithPositiveData(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
 			String datePickIn, String datePickOut, String adultNum, String childNum) throws IOException {
 		
@@ -140,13 +164,22 @@ public class BusinessFunctions {
 	    sp.getCheckOut().sendKeys(datePickOut);
 		sp.getAdultRoom(adultNum);
 		sp.getChildRoom(childNum);
+		sp.clickSearch().click();
 		
 		
 		
 	}
 	
-	
-	
+	public void welcomeMenuInBookAHotel(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum) throws IOException {
+		searchHotelWithPositiveData(driver,username,password,location,hotel,roomType,roomNumber,datePickIn,datePickOut,
+				adultNum,childNum);
+		shp=new SelectHotelPage(driver);
+		shp.getRadioButton().click();
+		shp.clickContinue().click();	
+		
+	}
+
 	
 	
 	public void bookHotel(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
@@ -154,7 +187,6 @@ public class BusinessFunctions {
 			String ccType,String expMonth,String expYear,String cvv) throws IOException {	
 		searchHotelWithPositiveData(driver,username,password,location,hotel,roomType,roomNumber,datePickIn,datePickOut,
 				adultNum,childNum);
-		sp.clickSearch().click();
 		shp=new SelectHotelPage(driver);
 		shp.getRadioButton().click();
 		shp.clickContinue().click();
@@ -171,6 +203,18 @@ public class BusinessFunctions {
 		
 	}
 	
+	
+	
+	public void welcomeMenuInBookingConfirmation(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,String lastName,String address,String ccNum,
+			String ccType,String expMonth,String expYear,String cvv) throws IOException {
+		bookHotel(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum,firstName,
+				lastName,address,ccNum,ccType,expMonth,expYear,cvv);
+		bp.clickBookNow().click();
+		
+			
+	}
+
 	public void bookingConfirm(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
 			String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,String lastName,String address,String ccNum,
 			String ccType,String expMonth,String expYear,String cvv) throws IOException {
@@ -182,6 +226,18 @@ public class BusinessFunctions {
 	
 	
 	}
+	
+	public void welcomeMenuInBookedItinerary(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
+			String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,String lastName,String address,String ccNum,
+			String ccType,String expMonth,String expYear,String cvv) throws IOException {
+		bookingConfirm(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum,firstName,
+				lastName,address,ccNum,ccType,expMonth,expYear,cvv);
+		bcp.clickItinerary().click();
+		
+		
+			
+	}
+	
 	
 	public void bookedItinerary(WebDriver driver, String username, String password,String location, String hotel, String roomType, String roomNumber,
 			String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,String lastName,String address,String ccNum,
@@ -243,6 +299,7 @@ public class BusinessFunctions {
 		rp.clickCheckbox().click();
 
 	}
+	
 	
 	
 	

@@ -16,7 +16,7 @@ import adactinHotelApp.pageObejcts.SearchResultsPage;
 import adactinHotelApp.pageObejcts.SelectHotelPage;
 import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
-import junit.framework.Assert;
+import org.testng.Assert;
 
 public class SearchResultsToApplicationTest extends BusinessFunctions {
 	public SearchResultsPage sp;
@@ -94,7 +94,19 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 	}
 	
 
-	
+	@Test(dataProvider="BookHotelValid")
+	public void clickShowAll(String username,String password,String location, String hotel, String roomType, String roomNumber,
+	String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,
+	String lastName,String address,String ccNum,String ccType,String expMonth,String expYear,String cvv) throws IOException, InterruptedException {
+		driver.get(prop.getProperty("url"));
+		searchResults(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum,firstName,
+					lastName,address,ccNum,ccType,expMonth,expYear,cvv);
+		srp=new SearchResultsPage(driver);
+		Thread.sleep(2000);
+		srp.getShowAll().click();
+		Thread.sleep(2000);
+			
+	}
 	 @DataProvider(name = "BookHotelValid")
 		public Object[][] readHotelValid() throws IOException {
 			sheetName = "BookHotelPositiveTest";
