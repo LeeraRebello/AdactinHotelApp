@@ -7,15 +7,17 @@
     
       <class name="adactinHotelApp.tests.LoginToApplicationTest"/>
       <class name="adactinHotelApp.tests.NewUserToApplicationTest"/>
-      <class name="adactinHotelApp.tests.SearchHotelToApplicationTest"/>     
-       <class name="adactinHotelApp.tests.SelectHotelToApplicationTest"/> 
+       <class name="adactinHotelApp.tests.ForgotPasswordToApplicationTest"/> 
+       <class name="adactinHotelApp.tests.ResetPasswordToApplicationTest"/>
+       <class name="adactinHotelApp.tests.SearchHotelToApplicationTest"/>     
+        <class name="adactinHotelApp.tests.SelectHotelToApplicationTest"/> 
        <class name="adactinHotelApp.tests.BookingAHotelToApplicationTest"/> 
        <class name="adactinHotelApp.tests.BookingConfirmationToApplicationTest"/>
        <class name="adactinHotelApp.tests.BookedItineraryToApplicationTest"/>
        <class name="adactinHotelApp.tests.SearchResultsToApplicationTest"/>
        <class name="adactinHotelApp.tests.LoginAgainToApplicationTest"/>  
-        <class name="adactinHotelApp.tests.ForgotPasswordToApplicationTest"/> 
         <class name="adactinHotelApp.tests.ChangePasswordToApplicationTest"/> 
+         
       
     </classes>
   </test> <!-- Test -->

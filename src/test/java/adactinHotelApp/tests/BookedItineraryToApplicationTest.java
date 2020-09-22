@@ -19,11 +19,11 @@ import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
 
 public class BookedItineraryToApplicationTest extends BusinessFunctions {
-	public WebDriver driver;
-	public BookedItineraryPage bip;
-	public BookingConfirmationPage bcp;
-	public String sheetName;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private BookedItineraryPage bip;
+	private BookingConfirmationPage bcp;
+	private String sheetName;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 
 	@BeforeTest
@@ -124,34 +124,10 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		Thread.sleep(3000);
  	}
 	
-	
 
-/*
+
 	@Test(dataProvider="BookHotelValid")
-	public void cancelSelectedFunctionality(String username,String password,String location, String hotel, String roomType, String roomNumber,
-	String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,
-	String lastName,String address,String ccNum,String ccType,String expMonth,String expYear,String cvv) throws IOException, InterruptedException {
-		driver.get(prop.getProperty("url"));
-		bookingConfirm(driver,username,password,location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum, childNum,firstName,
-				lastName,address,ccNum,ccType,expMonth,expYear,cvv);
-		bcp=new BookingConfirmationPage(driver);
-		String orderNumber=bcp.getOrderNumber();
-		bcp.clickItinerary().click();
-		bip=new BookedItineraryPage(driver);	
-		bip.getElement(orderNumber);
-		Thread.sleep(000);
-		bip.clickCancelSelected().click();
-		driver.switchTo().alert().accept();
-		Thread.sleep(3000);
-		
-		
-	}
-	*/
-	
-	
-/*
-	@Test(dataProvider="BookHotelValid")
-	public void cancelSinleSelected(String username,String password,String location, String hotel, String roomType, String roomNumber,
+	public void cancelMultpileSelectedOrdersByClickingCheckbox(String username,String password,String location, String hotel, String roomType, String roomNumber,
 	String datePickIn, String datePickOut, String adultNum, String childNum,String firstName,
 	String lastName,String address,String ccNum,String ccType,String expMonth,String expYear,String cvv) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
@@ -161,17 +137,32 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		String orderNumber=bcp.getOrderNumber();
 		bcp.clickItinerary().click();
 		bip=new BookedItineraryPage(driver);
-		bip.cancelSingleBooking(orderNumber);
+		String value=prop.getProperty("BulkCancel");
+		int number=Integer.parseInt(value);
+		int rowCountBeforeCancellation=bip.getRowCount();
+		System.out.println(rowCountBeforeCancellation);
+		bip.cancelMultipleOrders(number);
 		Thread.sleep(3000);
+		bip.clickCancelSelected().click();
+		Thread.sleep(2000);
+		driver.switchTo().alert().accept();
+		int rowCountAfterCancellation=rowCountBeforeCancellation-number+1;
+		System.out.println(rowCountAfterCancellation);
+		Assert.assertTrue(rowCountBeforeCancellation>rowCountAfterCancellation, "Assertion failed");
+		
+	   
+	
 	}
-	*/
+	
+	
 	
 	 @DataProvider(name = "BookHotelValid")
 		public Object[][] readHotelValid() throws IOException {
-			sheetName = "BookHotelPositiveTest";
+			sheetName =prop.getProperty("validBookAHotelSheet");
 			return ExcelDataUtils.readExcel(filePath, sheetName);
 		}
 
+	
   @AfterTest
 	public void tearDown() {
 		driver.close();

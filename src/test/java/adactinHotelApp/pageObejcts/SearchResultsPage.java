@@ -19,6 +19,9 @@ public class SearchResultsPage {
 	@FindBy(xpath="//input[@name='ids[]']")
 	WebElement checkbox;
 	
+	@FindBy(xpath="(//table[@class='login']/tbody/tr)[2]/td/table/tbody/tr/td[2]/input")
+	WebElement orderId;
+	
 	@FindBy(id="search_hotel")
 	WebElement searchHotel;
 	
@@ -69,6 +72,18 @@ public class SearchResultsPage {
 		return checkbox;
 	}
 
+	public String getOrderId() {
+		return orderId.getAttribute("value");
+	}
+	
+	public BookedItineraryPage bookedItineraryPage() {
+		cancelSelected.click();
+		driver.switchTo().alert().accept();
+		BookedItineraryPage bip=new BookedItineraryPage(driver);
+		return bip;
+	}
+	
+	
 	public WebElement getCancelSelected() {
 		return cancelSelected;
 	}

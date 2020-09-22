@@ -16,10 +16,10 @@ import adactinHotelApp.utils.ExcelDataUtils;
 import org.testng.Assert;
 
 public class SelectHotelToApplicationTest extends BusinessFunctions {
-	public WebDriver driver;
-	SelectHotelPage shp;
-	public String sheetName;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private SelectHotelPage shp;
+	private String sheetName;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 
 	@BeforeTest
@@ -171,7 +171,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "SelectHotel")
 	public Object[][] readHotelWithValidData() throws IOException {
-		sheetName = "SearchHotelPositiveTest";
+		sheetName = prop.getProperty("validSearchHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 

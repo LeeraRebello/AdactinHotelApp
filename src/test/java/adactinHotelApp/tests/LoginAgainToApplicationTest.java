@@ -2,6 +2,7 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -14,11 +15,10 @@ import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
 
 public class LoginAgainToApplicationTest extends BusinessFunctions {
-	
-	public LoginPage lp;
-	public LoginAgainPage lap;
-	public String sheetName;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private LoginAgainPage lap;
+	private String sheetName;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 
 	@BeforeTest
@@ -49,7 +49,7 @@ public class LoginAgainToApplicationTest extends BusinessFunctions {
 	
   @DataProvider(name = "BookHotelValid")
 	public Object[][] readHotelValid() throws IOException {
-		sheetName = "BookHotelPositiveTest";
+		sheetName = prop.getProperty("validBookAHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
   @AfterTest

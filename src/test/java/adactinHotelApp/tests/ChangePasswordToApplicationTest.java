@@ -2,6 +2,7 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -13,10 +14,11 @@ import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
 
 public class ChangePasswordToApplicationTest extends BusinessFunctions  {
-	public ChangePasswordFormPage cp;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private ChangePasswordFormPage cp;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
-	public String sheetName;
+	private String sheetName;
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -60,28 +62,27 @@ public class ChangePasswordToApplicationTest extends BusinessFunctions  {
 		Thread.sleep(2000);
 		cp.clickSubmit().click();
 		Thread.sleep(2000);
-		
 	}
 	
 	
 	
 	@DataProvider(name = "ChangePasswordData")
 	public Object[][] readChangePassword() throws IOException {
-		sheetName = "ChangePassword";
+		sheetName = prop.getProperty("changePasswordSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName,1);
 
 	}
 
 	@DataProvider(name = "ChangePasswordWithCurrentPassword")
 	public Object[][] readChangePasswordByCurrentPassword() throws IOException {
-		sheetName = "ChangePassword";
+		sheetName = prop.getProperty("changePasswordSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName,2);
 
 	}
 	
 	@DataProvider(name = "ChangePasswordWithoutMatch")
 	public Object[][] readChangePasswordWithoutMatch() throws IOException {
-		sheetName = "ChangePassword";
+		sheetName = prop.getProperty("changePasswordSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName,3);
 
 	}

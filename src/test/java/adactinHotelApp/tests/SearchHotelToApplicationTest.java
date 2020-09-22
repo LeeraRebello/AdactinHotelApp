@@ -22,11 +22,11 @@ import org.testng.Assert;
 
 public class SearchHotelToApplicationTest extends BusinessFunctions {
 
-	public WebDriver driver;
-	public SearchHotelPage sp;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private SearchHotelPage sp;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
-	public String sheetName;
+	private String sheetName;
 
 	@BeforeTest()
 	public void initialize() throws IOException {
@@ -82,19 +82,17 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 
 	}
 
-	@Test(dataProvider = "SearchHotelValid")
-	public void showUsername(String username, String password, String location, String hotel, String roomType,
-			String roomNumber, String datePickIn, String datePickOut, String adultNum, String childNum)
-			throws IOException, InterruptedException {
+	@Test(dataProvider = "ValidLoginData")
+	public void showUsername(String username, String password) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		sp = new SearchHotelPage(driver);
-		searchHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn, datePickOut,
-				adultNum, childNum);
+		welcomeMenuInSearchHotel(driver, username, password);
 		String expectedUsername = "Hello" + " " + username + "!";
 		Assert.assertEquals(expectedUsername, sp.showUsername(), "Username is not as expected ");
 		
 	}
-
+	
+	
 	@Test(dataProvider = "ValidLoginData")
 	public void navigationToSearchHotel(String username, String password) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
@@ -163,31 +161,31 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "SearchHotelValid")
 	public Object[][] readHotelWithValidData() throws IOException {
-		sheetName = "SearchHotelPositiveTest";
+		sheetName = prop.getProperty("validSearchHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "SearchHotelInvalid")
 	public Object[][] readHotelWithInvalidData() throws IOException {
-		sheetName = "SearchHotelNegativeTest";
+		sheetName = prop.getProperty("invalidSearchHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "ValidLoginData")
 	public Object[][] readValidLoginData() throws IOException {
-		sheetName = "LoginPositiveTest";
+		sheetName = prop.getProperty("validLoginSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "SearchHotelWithInvalidDate")
 	public Object[][] readHotelWithCheckInGreaterThanCheckOut() throws IOException {
-		sheetName = "SearchHotelNegativeTest";
+		sheetName = prop.getProperty("invalidSearchHotelSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName, 9);
 	}
 
 	@DataProvider(name = "SearchHotelWithDatesInPast")
 	public Object[][] readHotelWithDatesInthePast() throws IOException {
-		sheetName = "SearchHotelNegativeTest";
+		sheetName = prop.getProperty("invalidSearchHotelSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName, 10);
 	}
 

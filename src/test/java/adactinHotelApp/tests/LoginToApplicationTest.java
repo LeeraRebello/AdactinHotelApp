@@ -16,11 +16,12 @@ import adactinHotelApp.utils.ExcelDataUtils;
 import junit.framework.Assert;
 
 public class LoginToApplicationTest extends BusinessFunctions {
-	public WebDriver driver;
-	public LoginPage lp;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private LoginPage lp;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
-	public String sheetName;
+	private String sheetName;
+	private String rowNumber;
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -34,22 +35,23 @@ public class LoginToApplicationTest extends BusinessFunctions {
 
 	}
 
-	@Test(dataProvider = "InValidLoginData")
-	public void invalidLoginCredentials(String username, String password, String email) throws IOException {
+	@Test(dataProvider = "InvalidLoginData")
+	public void invalidLoginCredentials(String username, String password) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		loginCredentials(driver, username, password);
+		Thread.sleep(2000);
 	}
 
 	@Test
-	public void clickOnForgotPassword() throws InterruptedException {
+	public void navigationToForgotPassword() throws InterruptedException {
 		driver.get(prop.getProperty("url"));
 		lp = new LoginPage(driver);
 		lp.getForgotPassword().click();
 
 	}
 
-	@Test(dataProvider = "InValidLoginData")
-	public void clickOnResetPassword(String username, String password, String email)
+	@Test(dataProvider = "ResetPassword")
+	public void navigationToResetPassword(String username, String password, String email)
 			throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		resetPassword(driver, username, password, email);
@@ -66,16 +68,27 @@ public class LoginToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "ValidLoginData")
 	public Object[][] readValidLoginData() throws IOException {
-		sheetName = "LoginPositiveTest";
+		sheetName=prop.getProperty("validLoginSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
-	@DataProvider(name = "InValidLoginData")
+	@DataProvider(name = "InvalidLoginData")
 	public Object[][] readInvalidLoginData() throws IOException {
-		sheetName = "LoginNegativeTest";
+		sheetName=prop.getProperty("invalidLoginSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}
+	
+	@DataProvider(name = "ResetPassword")
+	public Object[][] readResetPassword() throws IOException {
+		sheetName=prop.getProperty("resetPasswordSheet");
+		//rowNumber=prop.getProperty("rowForResetPassword");
+		//int row=Integer.parseInt(rowNumber);
+		return ExcelDataUtils.readSingleRow(filePath, sheetName,1);
+
+	}
+
+
 
 	@AfterTest
 	public void tearDown() {

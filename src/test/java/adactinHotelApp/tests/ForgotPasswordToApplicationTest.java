@@ -15,13 +15,12 @@ import adactinHotelApp.utils.ExcelDataUtils;
 
 public class ForgotPasswordToApplicationTest extends BusinessFunctions{
 	
-	public WebDriver driver;
-	public ForgotPasswordFormPage fp;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private ForgotPasswordFormPage fp;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
-	public String sheetName;
-	public String columnName;
-
+	private String sheetName;
+	
 	@BeforeTest
 	public void initialize() throws IOException {
 		driver = initializeDriver();
@@ -38,18 +37,7 @@ public class ForgotPasswordToApplicationTest extends BusinessFunctions{
 	
 
 	}
-	
-	@Test(dataProvider = "ResetPasswordRecoveryEmailData")
-	public void resetPasswordCredentials(String username,String password,String email) throws IOException, InterruptedException {
-		driver.get(prop.getProperty("url"));
-		resetPassword(driver,username,password,email);
-		ForgotPasswordFormPage fp = new ForgotPasswordFormPage(driver);
-		fp.getEmailRecovery().sendKeys(email);
-		fp.clickEmailPassword().click();
-		Thread.sleep(2000);
 
-	}
-	
 	@Test(dataProvider = "ForgotPasswordRecoveryEmailData")
 	public void resetFunctionality(String email) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
@@ -64,14 +52,7 @@ public class ForgotPasswordToApplicationTest extends BusinessFunctions{
 	
 	@DataProvider(name = "ForgotPasswordRecoveryEmailData")
 	public Object[][] readForgotPassword() throws IOException {
-		sheetName = "RecoveryEmail";
-		return ExcelDataUtils.readExcel(filePath, sheetName);
-
-	}
-	
-	@DataProvider(name = "ResetPasswordRecoveryEmailData")
-	public Object[][] readResetPassword() throws IOException {
-		sheetName = "LoginNegativeTest";
+		sheetName = prop.getProperty("recoveryEmailSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}

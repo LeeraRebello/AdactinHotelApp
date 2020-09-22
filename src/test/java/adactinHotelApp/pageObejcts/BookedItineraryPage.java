@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BookedItineraryPage {
 	
@@ -40,6 +42,9 @@ public class BookedItineraryPage {
 	WebElement go;
 	
    @FindBy(xpath="(//table[@class='login']/tbody/tr)[2]/td/table/tbody/tr/td[2]/input")
+   WebElement orderIDText;
+   
+   @FindBy(xpath="(//table[@class='login']/tbody/tr)[2]/td/table/tbody/tr/td[2]")
    WebElement orderID;
    
  
@@ -67,31 +72,49 @@ public class BookedItineraryPage {
 	  return table.findElements(By.xpath("//td/table/tbody/tr")).size();
 
    }
+
    
    public int  getColumnCount() {
-	   return table.findElements(By.xpath("//td/table/tbody/tr/td[2]")).size();
+	   return table.findElements(By.xpath("//td/table/tbody/tr/td[1]")).size();
    }
    
-   
-   public void getElement(String orderId) {
-	   int count=getColumnCount();
-	   for(int i=count-1; i>=1;i--) {
-		   String value= table.findElements(By.xpath("//td/table/tbody/tr/td[2]/input")).get(i).getAttribute("value");
-		   if(value.equals(orderId)) {
-			   table.findElement(By.xpath("//td/table/tbody/tr/td[2]/preceding-sibling::td/input")).click();
+   public String orderIdOfDeletedOrder(String orderId) {
+	   int count= driver.findElements(By.xpath("(//table[@class='login']/tbody/tr)[2]/td/table/tbody/tr/td[2]")).size();
+	   for(int i=0; i<count-1;i++) {
+		   String text= table.findElements(By.xpath("//td/table/tbody/tr/td[2]/input")).get(i).getAttribute("value");
+		   if(text.equals(orderId)) {
+			   System.out.println("Not deleted");
 		   }
+		   
 	   }
-	
+	   return null;
    }
-   
+
+   public void cancelMultipleOrders(int number) {
+	   int count=getColumnCount();
+	   WebDriverWait wait= new WebDriverWait(driver,20);
+	   for(int i=0;i<count;i++) {
+		  while(i<number)
+		   {
+			   WebElement element=wait.until(ExpectedConditions.elementToBeClickable(table.findElements(By.xpath("//td/table/tbody/tr/td[2]/preceding-sibling::td/input")).get(i)));
+			   if(!element.isSelected()) {
+				   element.click();
+				   break;
+			   }
+				   
+		   } 
+	   }
+   }
    
    public void cancelSingleBooking(String orderId) {
 	   int count=getColumnCount();
-	   for(int i=0; i<=count-1;i++) {
+	   WebDriverWait wait= new WebDriverWait(driver,20);
+	   for(int i=0; i<count;i++) {
 		   String value= table.findElements(By.xpath("//td/table/tbody/tr/td[3]/input")).get(i).getAttribute("value");
 		   if(value.contains(orderId)) {
-			   table.findElement(By.xpath("//td/table/tbody/tr/td[3]/input")).click();
-			   break;
+		   WebElement element= wait.until(ExpectedConditions.elementToBeClickable(table.findElement(By.xpath("//td/table/tbody/tr/td[3]/input"))));
+			 if(!element.isSelected())
+				 element.click();
 		   }
 	   }
    }
@@ -106,8 +129,9 @@ public class BookedItineraryPage {
 	}
 	
 	public String getCancellationOrderID(){
-		return orderID.getAttribute("value");
+		return orderIDText.getAttribute("value");
 	}
+	
 	
 	public WebElement getCancellationCheckBox() {
 		return checkBox;

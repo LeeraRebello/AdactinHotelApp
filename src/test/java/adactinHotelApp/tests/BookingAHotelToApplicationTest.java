@@ -11,18 +11,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import adactinHotelApp.pageObejcts.BookAHotelPage;
-import adactinHotelApp.pageObejcts.LoginPage;
-import adactinHotelApp.pageObejcts.SearchHotelPage;
-import adactinHotelApp.pageObejcts.SelectHotelPage;
 import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
 
 public class BookingAHotelToApplicationTest extends BusinessFunctions {
 
-	public WebDriver driver;
-	public BookAHotelPage bp;
-	public String sheetName;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private BookAHotelPage bp;
+	private String sheetName;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 
 	@BeforeTest
@@ -30,11 +27,9 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		driver = initializeDriver();
 	}
 
-	@Test(dataProvider = "BookHotelValid")
+	@Test(dataProvider = "BookHotel")
 	public void verifyTitle(String username, String password, String location, String hotel, String roomType,
-			String roomNumber, String datePickIn, String datePickOut, String adultNum, String childNum,
-			String firstName, String lastName, String address, String ccNum, String ccType, String expMonth,
-			String expYear, String cvv) throws IOException, InterruptedException {
+			String roomNumber, String datePickIn, String datePickOut, String adultNum, String childNum) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		welcomeMenuInBookAHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn,
 				datePickOut, adultNum, childNum);
@@ -126,7 +121,6 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		bp = new BookAHotelPage(driver);
 
 		Assert.assertNotEquals(bp.getTotalPrice(), bp.matchTotalPrice(), "Total price is as expected");
-		// System.out.println("Total price is not as expected");
 		Thread.sleep(2000);
 
 	}
@@ -141,7 +135,6 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 				childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		bp = new BookAHotelPage(driver);
 		Assert.assertEquals(bp.getFinalPrice(), bp.matchFinalPrice(), 0.001, "Final price is not as expected");
-		System.out.println("Total price is not as expected");
 		Thread.sleep(2000);
 
 	}
@@ -223,25 +216,25 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "BookHotelValid")
 	public Object[][] readHotelValid() throws IOException {
-		sheetName = "BookHotelPositiveTest";
+		sheetName = prop.getProperty("validBookAHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "BookHotelInvalid")
 	public Object[][] readHotelInvalid() throws IOException {
-		sheetName = "BookHotelNegativeTest";
+		sheetName = prop.getProperty("invalidBookAHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "BookHotel")
 	public Object[][] readHotel() throws IOException {
-		sheetName = "SearchHotelPositiveTest";
+		sheetName = prop.getProperty("validSearchHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 
 	@DataProvider(name = "BookHotelCCExpiry")
 	public Object[][] readHotelCCExpiry() throws IOException {
-		sheetName = "BookHotelNegativeTest";
+		sheetName = prop.getProperty("invalidBookAHotelSheet");
 		return ExcelDataUtils.readSingleRow(filePath, sheetName, 10);
 	}
 

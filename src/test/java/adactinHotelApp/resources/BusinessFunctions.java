@@ -28,6 +28,7 @@ import adactinHotelApp.pageObejcts.ForgotPasswordFormPage;
 import adactinHotelApp.pageObejcts.LoginAgainPage;
 import adactinHotelApp.pageObejcts.LoginPage;
 import adactinHotelApp.pageObejcts.RegistrationPage;
+import adactinHotelApp.pageObejcts.ResetPasswordPage;
 import adactinHotelApp.pageObejcts.SearchHotelPage;
 import adactinHotelApp.pageObejcts.SearchResultsPage;
 import adactinHotelApp.pageObejcts.SelectHotelPage;
@@ -38,6 +39,7 @@ public class BusinessFunctions {
 	public WebDriver driver;
 	public Properties prop;
 	public LoginPage lp;
+	public RegistrationPage urp;
 	public SearchHotelPage sp;
 	public BookAHotelPage bp;
 	public SelectHotelPage shp;
@@ -46,6 +48,7 @@ public class BusinessFunctions {
 	public SearchResultsPage srp;
 	public LoginAgainPage lap;
 	public ForgotPasswordFormPage fp;
+	public ResetPasswordPage rp;
 	public static Logger log=LogManager.getLogger(BusinessFunctions.class.getName());
 
 	public WebDriver initializeDriver() throws IOException {
@@ -283,25 +286,23 @@ public class BusinessFunctions {
 		FileInputStream fis = new FileInputStream(
 				System.getProperty("user.dir") + "\\src\\test\\java\\adactinHotelApp\\resources\\data.properties");
 		prop.load(fis);
-		RegistrationPage rp = new RegistrationPage(driver);
-		rp = new RegistrationPage(driver);
+	    urp = new RegistrationPage(driver);
+		urp = new RegistrationPage(driver);
 		lp = new LoginPage(driver);
 		lp.getNewUser();
-		rp.getUserName().sendKeys(username);
-		rp.getPassword().sendKeys(password);
-		rp.getConfirmPassword().sendKeys(confirmPassword);
-		rp.getFullName().sendKeys(fullname);
-		rp.getEmailAdd().sendKeys(email);
-		String captchaForm = rp.getCaptcha().getText();
+		urp.getUserName().sendKeys(username);
+		urp.getPassword().sendKeys(password);
+		urp.getConfirmPassword().sendKeys(confirmPassword);
+		urp.getFullName().sendKeys(fullname);
+		urp.getEmailAdd().sendKeys(email);
+		String captchaForm = urp.getCaptcha().getText();
 		Thread.sleep(3000);
-		rp.getCaptchaForm().sendKeys(captchaForm);
+		urp.getCaptchaForm().sendKeys(captchaForm);
 		Thread.sleep(2000);
-		rp.clickCheckbox().click();
+		//urp.clickCheckbox().click();
 
 	}
 	
 	
 	
-	
-
 }

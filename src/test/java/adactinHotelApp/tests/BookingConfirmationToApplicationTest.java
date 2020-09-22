@@ -23,10 +23,10 @@ import org.apache.logging.log4j.*;
 
 public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 
-	public WebDriver driver;
-	public BookingConfirmationPage bcp;
-	public String sheetName;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private BookingConfirmationPage bcp;
+	private String sheetName;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 
 	@BeforeTest
@@ -198,7 +198,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 
 	@DataProvider(name = "BookHotelValid")
 	public Object[][] readHotelValid() throws IOException {
-		sheetName = "BookHotelPositiveTest";
+		sheetName = prop.getProperty("validBookAHotelSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 	}
 

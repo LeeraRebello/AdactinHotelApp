@@ -16,11 +16,11 @@ import junit.framework.Assert;
 
 public class NewUserToApplicationTest extends BusinessFunctions {
 
-	public WebDriver driver;
-	public RegistrationPage rp;
-	public String filePath = System.getProperty("user.dir")
+	private WebDriver driver;
+	private RegistrationPage urp;
+	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
-	public String sheetName;
+	private String sheetName;
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -40,33 +40,54 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 	public void newUserDetails(String username, String password, String confirmPassword, String fullname, String email)
 			throws InterruptedException, IOException {
 		driver.get(prop.getProperty("url"));
-		rp = new RegistrationPage(driver);
+		urp = new RegistrationPage(driver);
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
-		rp.clickRegister().click();
+		urp.clickCheckbox().click();
+		urp.clickRegister().click();
+		Thread.sleep(2000);
+		
+	}
+	@Test(dataProvider = "NewUserReset")
+	public void newUserWithoutTermsAndConditions(String username, String password, String confirmPassword, String fullname, String email)
+			throws InterruptedException, IOException {
+		driver.get(prop.getProperty("url"));
+		urp = new RegistrationPage(driver);
+		newUserDetails(driver, username, password, confirmPassword, fullname, email);
+	    urp.clickRegister().click();
+	    Thread.sleep(2000);
 		
 	}
 
-	@Test(dataProvider = "NewUser")
+	@Test(dataProvider = "NewUserReset")
 	public void newUserReset(String username, String password, String confirmPassword, String fullname, String email)
 			throws InterruptedException, IOException {
 		driver.get(prop.getProperty("url"));
-		rp = new RegistrationPage(driver);
+		urp = new RegistrationPage(driver);
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
-		rp.clickReset().click();
+		urp.clickCheckbox().click();
+		urp.clickReset().click();
 		
 
 	}
 
 	@DataProvider(name = "NewUser")
 	public Object[][] readNewUserWithValidDetails() throws IOException {
-		sheetName = "NewUserRegistration";
+		sheetName = prop.getProperty("newUserRegistrationSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}
+	
+	@DataProvider(name = "NewUserReset")
+	public Object[][] readNewUserReset() throws IOException {
+		sheetName = prop.getProperty("newUserRegistrationSheet");
+		return ExcelDataUtils.readSingleRow(filePath, sheetName,1);
+
+	}
+
 
 	@DataProvider(name = "VerifyTitle")
 	public Object[][] readTitle() throws IOException {
-		sheetName = "LoginPositiveTest";
+		sheetName = prop.getProperty("validLoginSheet");
 		return ExcelDataUtils.readExcel(filePath, sheetName);
 
 	}
