@@ -2,6 +2,8 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -25,6 +27,7 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 	private String sheetName;
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
+	private static Logger log=LogManager.getLogger(BookedItineraryToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -44,6 +47,7 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		bip=new BookedItineraryPage(driver);
 		Assert.assertNotEquals(driver.getTitle(), "Adactin.com - Booked Itinerary");
 		Thread.sleep(2000);
+		log.error("Title does not match");
  	}
 	
 	@Test(dataProvider="BookHotelValid")
@@ -57,6 +61,7 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		Thread.sleep(2000);
 		bip.clickGo().click();	
 		Thread.sleep(2000);
+		log.info("Selected booking is displayed");
 		
 		
 	}
@@ -73,6 +78,7 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		String expectedUsername="Hello"+" "+username+"!";
 		Assert.assertEquals(bip.showUsername(),expectedUsername, "Username is not showing as expected");
 		Thread.sleep(3000);
+		log.info("Username is showing as expected");
  	}
 	
 	
@@ -149,8 +155,8 @@ public class BookedItineraryToApplicationTest extends BusinessFunctions {
 		int rowCountAfterCancellation=rowCountBeforeCancellation-number+1;
 		System.out.println(rowCountAfterCancellation);
 		Assert.assertTrue(rowCountBeforeCancellation>rowCountAfterCancellation, "Assertion failed");
-		
-	   
+		log.info("Multiple bookings cancelled ");
+	  
 	
 	}
 	

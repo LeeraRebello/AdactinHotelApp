@@ -2,18 +2,17 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import adactinHotelApp.pageObejcts.ForgotPasswordFormPage;
 import adactinHotelApp.pageObejcts.LoginPage;
-import adactinHotelApp.pageObejcts.RegistrationPage;
 import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
-import junit.framework.Assert;
 
 public class LoginToApplicationTest extends BusinessFunctions {
 	private WebDriver driver;
@@ -22,6 +21,8 @@ public class LoginToApplicationTest extends BusinessFunctions {
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	private String sheetName;
 	private String rowNumber;
+	
+	private static Logger log=LogManager.getLogger(LoginToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -32,6 +33,7 @@ public class LoginToApplicationTest extends BusinessFunctions {
 	public void validLoginCredentials(String username, String password) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		loginCredentials(driver, username, password);
+		log.info("Login successful");
 
 	}
 
@@ -40,6 +42,7 @@ public class LoginToApplicationTest extends BusinessFunctions {
 		driver.get(prop.getProperty("url"));
 		loginCredentials(driver, username, password);
 		Thread.sleep(2000);
+		log.error("Invalid login");
 	}
 
 	@Test
@@ -47,6 +50,9 @@ public class LoginToApplicationTest extends BusinessFunctions {
 		driver.get(prop.getProperty("url"));
 		lp = new LoginPage(driver);
 		lp.getForgotPassword().click();
+		log.info("Forgot Password page is displayed");
+		
+		
 
 	}
 
@@ -55,6 +61,7 @@ public class LoginToApplicationTest extends BusinessFunctions {
 			throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		resetPassword(driver, username, password, email);
+		log.info("Reset Password page is displayed");
 
 	}
 
@@ -63,6 +70,7 @@ public class LoginToApplicationTest extends BusinessFunctions {
 		driver.get(prop.getProperty("url"));
 		lp = new LoginPage(driver);
 		lp.getNewUser();
+		log.info("New user Registartion page will be displayed");
 
 	}
 

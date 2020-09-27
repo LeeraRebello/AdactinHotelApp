@@ -28,6 +28,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 	private String sheetName;
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
+	private static Logger log=LogManager.getLogger(BookingConfirmationToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -44,7 +45,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 		welcomeMenuInBookingConfirmation(driver, username, password, location, hotel, roomType, roomNumber, datePickIn,
 				datePickOut, adultNum, childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		Assert.assertNotEquals(driver.getTitle(), "Adactin.com - Hotel Booking Confirmation");
-
+        log.error("Title does not match");
 	}
 
 	@Test(dataProvider = "BookHotelValid")
@@ -59,6 +60,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 		Thread.sleep(2000);
 		bcp.clickItinerary().click();
 		Thread.sleep(2000);
+		log.info("Booking confirmed and Booked itinerary page will be displayed");
 
 	}
 
@@ -99,7 +101,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 				adultNum, childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		// product of room numbers,days,price per night should match with total price
 		Assert.assertNotEquals(bcp.getTotalPrice(), bcp.matchTotalPrice(), "Totals price is as expected");
-
+        log.error("Total price is not as expected");
 		Thread.sleep(2000);
 
 	}
@@ -116,6 +118,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 		// Adding gst to total price and matching with final billed price
 		Assert.assertEquals(bcp.getFinalPrice(), bcp.matchFinalPrice(), 0.001, "Final price is not as expected");
 		Thread.sleep(2000);
+		log.info("Final price is as expected");
 	}
 
 	@Test(dataProvider = "BookHotelValid")
@@ -128,7 +131,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 		bookingConfirm(driver, username, password, location, hotel, roomType, roomNumber, datePickIn, datePickOut,
 				adultNum, childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		Assert.assertNotNull("Order number should not be null", bcp.getOrderNumber());
-
+        log.info("Order number is generated");
 	}
 
 	@Test(dataProvider = "BookHotelValid")
@@ -142,6 +145,7 @@ public class BookingConfirmationToApplicationTest extends BusinessFunctions {
 		bcp = new BookingConfirmationPage(driver);
 		String expectedUsername = "Hello" + " " + username + "!";
 		Assert.assertEquals(bcp.showUsername(), expectedUsername, "Username is not showing as expected");
+		log.info("Username is showing as expected");
 	}
 
 	@Test(dataProvider = "BookHotelValid")

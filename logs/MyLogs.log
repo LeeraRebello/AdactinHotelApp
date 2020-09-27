@@ -1,0 +1,87 @@
+[ERROR] 2020-09-27 20:27:24.387 [main] LoginToApplicationTest - Invalid login
+[ERROR] 2020-09-27 20:27:26.815 [main] LoginToApplicationTest - Invalid login
+[ERROR] 2020-09-27 20:27:29.261 [main] LoginToApplicationTest - Invalid login
+[ERROR] 2020-09-27 20:27:31.597 [main] LoginToApplicationTest - Invalid login
+[ERROR] 2020-09-27 20:27:33.882 [main] LoginToApplicationTest - Invalid login
+[INFO ] 2020-09-27 20:27:35.105 [main] LoginToApplicationTest - Forgot Password page is displayed
+[INFO ] 2020-09-27 20:27:35.347 [main] LoginToApplicationTest - New user Registartion page will be displayed
+[INFO ] 2020-09-27 20:27:35.902 [main] LoginToApplicationTest - Reset Password page is displayed
+[INFO ] 2020-09-27 20:27:36.387 [main] LoginToApplicationTest - Login successful
+[INFO ] 2020-09-27 20:27:46.134 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:27:54.106 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:28:01.971 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:28:10.002 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:28:17.879 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:28:25.779 [main] NewUserToApplicationTest - New user registered successfully
+[INFO ] 2020-09-27 20:28:39.868 [main] NewUserToApplicationTest - Title matched
+[INFO ] 2020-09-27 20:28:45.852 [main] ForgotPasswordToApplicationTest - Password will be sent to email if the email id exist in the database
+[INFO ] 2020-09-27 20:28:48.359 [main] ForgotPasswordToApplicationTest - Password will be sent to email if the email id exist in the database
+[DEBUG] 2020-09-27 20:28:48.500 [main] ForgotPasswordToApplicationTest - Opening Forgot Password page
+[INFO ] 2020-09-27 20:28:50.767 [main] ForgotPasswordToApplicationTest - Going back to login page
+[DEBUG] 2020-09-27 20:28:52.196 [main] ResetPasswordToApplicationTest - Opening reset password page
+[INFO ] 2020-09-27 20:28:53.799 [main] ResetPasswordToApplicationTest - Back to login page
+[INFO ] 2020-09-27 20:29:02.726 [main] ResetPasswordToApplicationTest - New Password will be sent to email if the email exist in the database
+[INFO ] 2020-09-27 20:29:05.554 [main] ResetPasswordToApplicationTest - New Password will be sent to email if the email exist in the database
+[INFO ] 2020-09-27 20:29:08.264 [main] ResetPasswordToApplicationTest - New Password will be sent to email if the email exist in the database
+[ERROR] 2020-09-27 20:29:27.349 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:29.298 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:31.766 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:33.754 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:35.739 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:37.696 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:39.614 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:41.622 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:43.492 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[ERROR] 2020-09-27 20:29:45.679 [main] SearchHotelToApplicationTest - Invalid data provided for searching hotel
+[INFO ] 2020-09-27 20:29:46.658 [main] SearchHotelToApplicationTest - Title matched
+[DEBUG] 2020-09-27 20:29:46.768 [main] SearchHotelToApplicationTest - Opening Search Hotel page
+[INFO ] 2020-09-27 20:29:52.775 [main] SearchHotelToApplicationTest - Hotel search completed
+[INFO ] 2020-09-27 20:30:00.671 [main] SelectHotelToApplicationTest - Required fields are as expected
+[DEBUG] 2020-09-27 20:30:18.935 [main] SelectHotelToApplicationTest - Selecting radio button
+[INFO ] 2020-09-27 20:30:22.117 [main] SelectHotelToApplicationTest - Book a  hotel page will be displayed
+[ERROR] 2020-09-27 20:30:26.142 [main] SelectHotelToApplicationTest - Cannot select a hotel
+[ERROR] 2020-09-27 20:30:30.178 [main] SelectHotelToApplicationTest - Username is not showing as expected
+[INFO ] 2020-09-27 20:30:32.209 [main] SelectHotelToApplicationTest - Title matched
+[INFO ] 2020-09-27 20:30:37.353 [main] BookingAHotelToApplicationTest - Navigating to Search Hotel
+[ERROR] 2020-09-27 20:30:45.109 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:30:50.736 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:30:56.298 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:01.947 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:07.375 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:13.492 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:18.966 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:24.634 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:30.033 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[ERROR] 2020-09-27 20:31:35.922 [main] BookingAHotelToApplicationTest - Provided data is invalid to book the hotel
+[DEBUG] 2020-09-27 20:31:36.068 [main] BookingAHotelToApplicationTest - Opening Book A Hotel page
+[INFO ] 2020-09-27 20:31:39.540 [main] BookingAHotelToApplicationTest - Hotel booked
+[INFO ] 2020-09-27 20:31:49.159 [main] BookingAHotelToApplicationTest - Fields matched
+[ERROR] 2020-09-27 20:31:54.628 [main] BookingAHotelToApplicationTest - Credit card expiry field is accepting the year in past
+[INFO ] 2020-09-27 20:32:00.151 [main] BookingAHotelToApplicationTest - Final price is as expected
+[ERROR] 2020-09-27 20:32:05.644 [main] BookingAHotelToApplicationTest - Total price is not as expected
+[INFO ] 2020-09-27 20:32:17.676 [main] BookingAHotelToApplicationTest - Username is showing as expected
+[INFO ] 2020-09-27 20:32:19.923 [main] BookingAHotelToApplicationTest - Title matched
+[INFO ] 2020-09-27 20:32:32.623 [main] BookingConfirmationToApplicationTest - Booking confirmed and Booked itinerary page will be displayed
+[INFO ] 2020-09-27 20:32:53.135 [main] BookingConfirmationToApplicationTest - Final price is as expected
+[ERROR] 2020-09-27 20:32:56.767 [main] BookingConfirmationToApplicationTest - Total price is not as expected
+[INFO ] 2020-09-27 20:33:22.685 [main] BookingConfirmationToApplicationTest - Username is showing as expected
+[ERROR] 2020-09-27 20:33:26.143 [main] BookingConfirmationToApplicationTest - Title does not match
+[INFO ] 2020-09-27 20:33:34.916 [main] BookingConfirmationToApplicationTest - Order number is generated
+[INFO ] 2020-09-27 20:33:50.896 [main] BookedItineraryToApplicationTest - Selected booking is displayed
+[INFO ] 2020-09-27 20:34:06.090 [main] BookedItineraryToApplicationTest - Multiple bookings cancelled 
+[INFO ] 2020-09-27 20:35:08.922 [main] BookedItineraryToApplicationTest - Username is showing as expected
+[ERROR] 2020-09-27 20:35:20.414 [main] BookedItineraryToApplicationTest - Title does not match
+[DEBUG] 2020-09-27 20:35:32.255 [main] SearchResultsToApplicationTest - Finding rowcount before cancelling the booking
+[INFO ] 2020-09-27 20:35:36.523 [main] SearchResultsToApplicationTest - After cancelling the booking will be deleted from the booded intinerary page
+[DEBUG] 2020-09-27 20:35:46.766 [main] SearchResultsToApplicationTest - Clinking on cancel selected button
+[INFO ] 2020-09-27 20:35:48.872 [main] SearchResultsToApplicationTest - Selected booking will be cancelled
+[INFO ] 2020-09-27 20:36:01.041 [main] SearchResultsToApplicationTest - Able to logout from the application
+[INFO ] 2020-09-27 20:36:13.246 [main] SearchResultsToApplicationTest - Search hotel page will be displayed
+[INFO ] 2020-09-27 20:36:27.507 [main] SearchResultsToApplicationTest - All the bookings will be displayed
+[INFO ] 2020-09-27 20:36:39.260 [main] SearchResultsToApplicationTest - Dismissing the alert
+[INFO ] 2020-09-27 20:36:43.406 [main] SearchResultsToApplicationTest - Booking will not be cancelled
+[DEBUG] 2020-09-27 20:36:44.098 [main] LoginAgainToApplicationTest - Trying to logout from the application
+[INFO ] 2020-09-27 20:36:57.248 [main] LoginAgainToApplicationTest - Login page will be displayed again
+[INFO ] 2020-09-27 20:37:05.888 [main] ChangePasswordToApplicationTest - Password updated successfully
+[ERROR] 2020-09-27 20:37:11.075 [main] ChangePasswordToApplicationTest - Password changed
+[ERROR] 2020-09-27 20:37:16.372 [main] ChangePasswordToApplicationTest - Password changed

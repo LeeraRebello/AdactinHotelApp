@@ -2,6 +2,8 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,6 +23,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 	private String sheetName;
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
+	private static Logger log=LogManager.getLogger(SelectHotelToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -37,6 +40,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 				datePickOut, adultNum, childNum);
 		shp = new SelectHotelPage(driver);
 		Assert.assertEquals(driver.getTitle(), "Adactin.com - Select Hotel");
+		log.info("Title matched");
 	}
 
 	@Test(dataProvider = "SelectHotel")
@@ -49,9 +53,11 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 		shp = new SelectHotelPage(driver);
 		Thread.sleep(2000);
 		shp.getRadioButton().click();
+		log.debug("Selecting radio button");
 		Assert.assertTrue(shp.getRadioButton().isSelected());
 		shp.clickContinue().click();
 		Thread.sleep(3000);
+		log.info("Book a  hotel page will be displayed");
 
 	}
 
@@ -65,6 +71,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 		shp = new SelectHotelPage(driver);
 		shp.clickContinue().click();
 		Thread.sleep(2000);
+		log.error("Cannot select a hotel");
 	}
 
 	@Test(dataProvider = "SelectHotel")
@@ -92,6 +99,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 		Assert.assertEquals(shp.getHotel(), hotel, "Hotels do not match");
 		Assert.assertEquals(shp.getRoomType(), roomType, "Room types do not match");
 		Assert.assertEquals(shp.matchRoomNumber(), roomNumber, "Room numbers do not match");
+		log.info("Required fields are as expected");
 
 	}
 
@@ -106,6 +114,7 @@ public class SelectHotelToApplicationTest extends BusinessFunctions {
 		String expectedUsername = "Hello" + " " + username + "!";
 		Assert.assertNotEquals(shp.showUsername(), expectedUsername, "Username is showing as expected");
 		Thread.sleep(2000);
+		log.error("Username is not showing as expected");
 	}
 
 	@Test(dataProvider = "SelectHotel")

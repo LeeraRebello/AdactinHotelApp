@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
@@ -27,6 +29,7 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	private String sheetName;
+	private static Logger log=LogManager.getLogger(SearchHotelToApplicationTest.class.getName());
 
 	@BeforeTest()
 	public void initialize() throws IOException {
@@ -40,6 +43,7 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 		loginCredentials(driver, username, password);
 		sp = new SearchHotelPage(driver);
 		Assert.assertEquals(driver.getTitle(), "Adactin.com - Search Hotel");
+		log.info("Title matched");
 
 	}
 
@@ -49,11 +53,13 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 			throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
 		sp = new SearchHotelPage(driver);
+		log.debug("Opening Search Hotel page");
 		searchHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn, datePickOut,
 				adultNum, childNum);
 		Thread.sleep(2000);
 		sp.clickSearch().click();
 		Thread.sleep(2000);
+		log.info("Hotel search completed");
 	}
 
 	@Test(dataProvider = "SearchHotelInvalid")
@@ -65,6 +71,7 @@ public class SearchHotelToApplicationTest extends BusinessFunctions {
 		searchHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn, datePickOut,
 				adultNum, childNum);
 		sp.clickSearch().click();
+		log.error("Invalid data provided for searching hotel");
 		
 
 	}

@@ -2,6 +2,8 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -19,6 +21,7 @@ public class ChangePasswordToApplicationTest extends BusinessFunctions  {
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	private String sheetName;
+	private static Logger log=LogManager.getLogger(ChangePasswordToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -37,6 +40,7 @@ public class ChangePasswordToApplicationTest extends BusinessFunctions  {
 		Thread.sleep(2000);
 		cp.clickSubmit().click();
 		Thread.sleep(2000);
+		log.info("Password updated successfully");
 		
 	}
 	@Test(dataProvider="ChangePasswordWithCurrentPassword",priority=3)
@@ -49,6 +53,7 @@ public class ChangePasswordToApplicationTest extends BusinessFunctions  {
 		Thread.sleep(2000);
 		cp.clickSubmit().click();
 		Thread.sleep(2000);
+		log.error("Password changed");
 		
 	}
 	
@@ -62,6 +67,7 @@ public class ChangePasswordToApplicationTest extends BusinessFunctions  {
 		Thread.sleep(2000);
 		cp.clickSubmit().click();
 		Thread.sleep(2000);
+		log.error("Password changed");
 	}
 	
 	

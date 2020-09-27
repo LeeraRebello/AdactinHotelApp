@@ -22,6 +22,9 @@ public class ForgotPasswordFormPage {
 	 @FindBy(id="Reset")
 	 WebElement reset;
 	 
+	 @FindBy(xpath="//a[contains(text(),'Go back to Login page')]")
+	 WebElement goBack;
+	 
 	 public WebElement getEmailRecovery() {
 		 return recoveryEmail;
 	 }
@@ -32,6 +35,10 @@ public class ForgotPasswordFormPage {
 	 
 	 public WebElement clickReset() {
 		 return reset;
+	 }
+	 
+	 public WebElement goBackToLoginPage() {
+		 return goBack;
 	 }
 
 }

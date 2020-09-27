@@ -2,6 +2,8 @@ package adactinHotelApp.tests;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,7 +23,8 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
 	private String sheetName;
-
+	private static Logger log=LogManager.getLogger(NewUserToApplicationTest.class.getName());
+	
 	@BeforeTest
 	public void initialize() throws IOException {
 		driver = initializeDriver();
@@ -33,6 +36,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		lp = new LoginPage(driver);
 		lp.getNewUser();
 		Assert.assertEquals(driver.getTitle(), "Adactin.com - New User Registration");
+		log.info("Title matched");
 
 	}
 
@@ -45,6 +49,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		urp.clickCheckbox().click();
 		urp.clickRegister().click();
 		Thread.sleep(2000);
+		log.info("New user registered successfully");
 		
 	}
 	@Test(dataProvider = "NewUserReset")
@@ -55,6 +60,7 @@ public class NewUserToApplicationTest extends BusinessFunctions {
 		newUserDetails(driver, username, password, confirmPassword, fullname, email);
 	    urp.clickRegister().click();
 	    Thread.sleep(2000);
+	    
 		
 	}
 

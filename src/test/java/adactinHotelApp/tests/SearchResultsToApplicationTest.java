@@ -12,6 +12,8 @@ import adactinHotelApp.pageObejcts.SearchResultsPage;
 import adactinHotelApp.resources.BusinessFunctions;
 import adactinHotelApp.utils.ExcelDataUtils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -21,6 +23,7 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 	private String sheetName;
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
+	private static Logger log=LogManager.getLogger(SearchResultsToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -38,9 +41,11 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 					lastName,address,ccNum,ccType,expMonth,expYear,cvv);
 		srp=new SearchResultsPage(driver);
 		srp.getCheckbox().click();
+		log.debug("Clinking on cancel selected button");
 		srp.getCancelSelected().click();
 		Thread.sleep(2000);
 		driver.switchTo().alert().accept();
+		log.info("Selected booking will be cancelled");
 			
 	}
 	
@@ -56,11 +61,12 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 		srp.getCheckbox().click();
 		srp.getCancelSelected().click();
 		Thread.sleep(2000);
+		log.info("Dismissing the alert");
 		driver.switchTo().alert().dismiss();
 		Thread.sleep(2000);
 		srp.getCheckbox().click();
 		Thread.sleep(2000);
-			
+		log.info("Booking will not be cancelled");	
 	}
 	
 	@Test(dataProvider="BookHotelValid")
@@ -73,6 +79,7 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 		srp=new SearchResultsPage(driver);
 		srp.getSearchHotel().click();
 		Thread.sleep(2000);
+		log.info("Search hotel page will be displayed");
 			
 	}
 	
@@ -87,6 +94,7 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 		srp=new SearchResultsPage(driver);
 		srp.logout().click();
 		Thread.sleep(2000);
+		log.info("Able to logout from the application");
 			
 	}
 	
@@ -102,6 +110,7 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 		Thread.sleep(2000);
 		srp.getShowAll().click();
 		Thread.sleep(2000);
+		log.info("All the bookings will be displayed");
 			
 	}
 	
@@ -117,10 +126,12 @@ public class SearchResultsToApplicationTest extends BusinessFunctions {
 		String orderID=srp.getOrderId();
 		srp.getCheckbox().click();
 		BookedItineraryPage bip=srp.bookedItineraryPage();
+		log.debug("Finding rowcount before cancelling the booking");
 		int beforeRowCount=bip.getRowCount();
-		System.out.println(beforeRowCount);
+		//System.out.println(beforeRowCount);
 		String cancelledOrderId=bip.orderIdOfDeletedOrder(orderID);
-		Assert.assertNull(cancelledOrderId);		
+		Assert.assertNull(cancelledOrderId);	
+		log.info("After cancelling the booking will be deleted from the booded intinerary page");
 				
 	}
 	

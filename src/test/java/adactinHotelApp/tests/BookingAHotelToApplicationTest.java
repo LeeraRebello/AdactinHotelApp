@@ -3,6 +3,8 @@ package adactinHotelApp.tests;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -21,6 +23,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 	private String sheetName;
 	private String filePath = System.getProperty("user.dir")
 			+ "\\src\\test\\java\\adactinHotelApp\\resources\\TestData_AdactinHotelApp.xlsx";
+	private static Logger log=LogManager.getLogger(BookingAHotelToApplicationTest.class.getName());
 
 	@BeforeTest
 	public void initialize() throws IOException {
@@ -34,6 +37,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		welcomeMenuInBookAHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn,
 				datePickOut, adultNum, childNum);
 		Assert.assertEquals(driver.getTitle(), "Adactin.com - Book A Hotel");
+		log.info("Title matched");
 
 	}
 
@@ -43,10 +47,12 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 			String firstName, String lastName, String address, String ccNum, String ccType, String expMonth,
 			String expYear, String cvv) throws IOException, InterruptedException {
 		driver.get(prop.getProperty("url"));
+		log.debug("Opening Book A Hotel page");
 		bookHotel(driver, username, password, location, hotel, roomType, roomNumber, datePickIn, datePickOut, adultNum,
 				childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		bp = new BookAHotelPage(driver);
 		bp.clickBookNow().click();
+		log.info("Hotel booked");
 		Thread.sleep(2000);
 
 	}
@@ -62,6 +68,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		bp = new BookAHotelPage(driver);
 		bp.clickBookNow().click();
 		Thread.sleep(2000);
+		log.error("Provided data is invalid to book the hotel");
 
 	}
 
@@ -88,6 +95,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 				childNum, firstName, lastName, address, ccNum, ccType, expMonth, expYear, cvv);
 		bp = new BookAHotelPage(driver);
 		bp.getBackLink().click();
+		log.info("Navigating to Search Hotel");
 		Thread.sleep(2000);
 
 	}
@@ -106,6 +114,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		Assert.assertEquals(bp.getHotelName(), hotel, "Hotels do not match");
 		Assert.assertEquals(bp.getRoomType(), roomType, "Room types do not match");
 		Assert.assertEquals(bp.getRoomNumber(), roomNumber, "Room numbers do not match");
+		log.info("Fields matched");
 
 	}
 
@@ -122,6 +131,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 
 		Assert.assertNotEquals(bp.getTotalPrice(), bp.matchTotalPrice(), "Total price is as expected");
 		Thread.sleep(2000);
+		log.error("Total price is not as expected");
 
 	}
 
@@ -136,6 +146,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		bp = new BookAHotelPage(driver);
 		Assert.assertEquals(bp.getFinalPrice(), bp.matchFinalPrice(), 0.001, "Final price is not as expected");
 		Thread.sleep(2000);
+		log.info("Final price is as expected");
 
 	}
 
@@ -149,7 +160,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		bp = new BookAHotelPage(driver);
 		String expectedUsername = "Hello" + " " + username + "!";
 		Assert.assertEquals(bp.showUsername(), expectedUsername, "Username is not showing as expected");
-
+        log.info("Username is showing as expected");
 	}
 
 	@Test(dataProvider = "BookHotel")
@@ -211,6 +222,7 @@ public class BookingAHotelToApplicationTest extends BusinessFunctions {
 		bp = new BookAHotelPage(driver);
 		bp.clickBookNow().click();
 		Thread.sleep(2000);
+		log.error("Credit card expiry field is accepting the year in past");
 
 	}
 
